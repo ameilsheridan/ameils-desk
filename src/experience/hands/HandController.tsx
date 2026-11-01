@@ -164,10 +164,22 @@ export default function HandController({ textures }: { textures: TexSet }) {
         cup.updateWorldMatrix(true, false);
         const pos = GRIP.cup.pos.clone().applyMatrix4(cup.matrixWorld);
         const cq = new THREE.Quaternion().setFromRotationMatrix(t.m.extractRotation(cup.matrixWorld)).multiply(GRIP.cup.quat);
-        if (phase === 'reach') return { state: 'reaching', pose: 'open', pos: pos.add(new THREE.Vector3(0.02, 0.03, 0.03)), quat: cq, smooth: 0.13 };
-        if (phase === 'grip') return { state: 'grabbing', pose: 'mug', pos, quat: cq, smooth: 0.06 };
-        if (phase === 'release') return { state: 'releasing', pose: 'open', pos: pos.add(new THREE.Vector3(0.03, 0.04, 0.04)), quat: cq, smooth: 0.12 };
+        if (phase === 'reach') return { state: 'reaching', pose: 'reach', pos: pos.add(new THREE.Vector3(0.015, 0.025, 0.02)), quat: cq, smooth: 0.16 };
+        if (phase === 'grip') return { state: 'grabbing', pose: 'mug', pos, quat: cq, smooth: 0.05 };
+        if (phase === 'release') return { state: 'releasing', pose: 'reach', pos: pos.add(new THREE.Vector3(0.02, 0.035, 0.03)), quat: cq, smooth: 0.14 };
         if (phase === 'lift' || phase === 'hold' || phase === 'lower') return { state: 'holding', pose: 'mug', pos, quat: cq, smooth: 0, attached: true };
+      }
+      // notebook: the right hand drifts over to rest a finger near the cover's corner
+      const nbk = rig.notebook;
+      if (nbk && mode === 'desk' && hover === 'notebook') {
+        nbk.updateWorldMatrix(true, false);
+        const corner = new THREE.Vector3(0.05, 0.012, 0.08).applyMatrix4(nbk.matrixWorld);
+        const rel = rig.pointer.clone().sub(corner);
+        corner.x += THREE.MathUtils.clamp(rel.x * 0.08, -0.015, 0.015);
+        corner.z += THREE.MathUtils.clamp(rel.z * 0.08, -0.015, 0.015);
+        const tip = corner.add(new THREE.Vector3(0, 0.03, 0));
+        const dir = tip.clone().sub(elbow('right')).normalize();
+        return { state: 'pointing', pose: 'point', tip, quat: basisQuat(dir, new THREE.Vector3(0, 1, 0).addScaledVector(t.fwd, -0.2)), smooth: 0.18 };
       }
       // laptop: the index finger hovers over the trackpad (and taps it when opening)
       const lap = rig.laptop;

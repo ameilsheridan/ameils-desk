@@ -32,7 +32,7 @@ function Rig({ pose, grip, left, o }: { pose: PoseName; grip: 'hold' | 'desk' | 
       const handle = new THREE.Mesh(new THREE.TorusGeometry(0.014, 0.003, 10, 24, Math.PI), ceramic);
       handle.position.set(0.05, 0.035, 0); handle.rotation.z = -Math.PI / 2;
       phone.add(body, coffee, handle);
-      phone.quaternion.setFromAxisAngle(new THREE.Vector3(0, 1, 0), -0.65);
+      phone.quaternion.setFromAxisAngle(new THREE.Vector3(1, 0, 0), 0.5).multiply(new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), -0.35));
     }
     if (grip === 'hold') {
       // upright, screen toward the camera (+Z), top up

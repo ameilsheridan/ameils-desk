@@ -11,9 +11,10 @@ export default function HomeView() {
       <main id="main">
         <div className="intro">
           <p className="intro-eyebrow"><i aria-hidden="true" />Product designer in Kuala Lumpur</p>
-          <h1>Hi, I&rsquo;m<br />Ameil.</h1>
-          <p className="intro-lede">I make complex enterprise, AI and healthcare products feel calm, clear and human.</p>
-          <p className="intro-proof">Now designing at Vistra. Previously Head Designer on PhIS&nbsp;3.0.</p>
+          <h1>Hi, I&rsquo;m Ameil.</h1>
+          <p className="intro-motto"><span>Discover the problem.</span> <span>Design the solution.</span></p>
+          <p className="intro-lede">I design calm, clear products for enterprise, AI and healthcare.</p>
+          <p className="intro-proof">Currently designing at Vistra. Previously led design for PhIS&nbsp;3.0.</p>
           <IntroActions />
         </div>
         <ExperienceLoader />

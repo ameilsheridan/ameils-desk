@@ -47,8 +47,10 @@ export default function CameraRig() {
       pose.position.lerp(_np, k);
       pose.target.lerp(_nt, k);
     }
+    // tip the head back a touch while sipping
+    pose.target.y += 0.05 * a.sipTilt - 0.02 * a.sipT;
     const mode = useDesk.getState().mode;
-    const weight = rig.reduced ? 0 : (1 - a.camLaptop) * (1 - 0.8 * a.camPhone) * (1 - 0.8 * a.camNote) * (mode === 'desk' ? 1 : 0.5);
+    const weight = rig.reduced ? 0 : (1 - a.camLaptop) * (1 - 0.8 * a.camPhone) * (1 - 0.8 * a.camNote) * (1 - 0.85 * a.sipT) * (mode === 'desk' ? 1 : 0.5);
     easing.damp2(ptr.current, rig.pointerNdc, 0.6, Math.min(dt, 0.05));
     pose.position.x += ptr.current.x * 0.028 * weight;
     pose.position.y += ptr.current.y * 0.014 * weight;

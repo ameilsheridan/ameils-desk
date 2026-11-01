@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from 'next';
 import TransitionLayer from '@/components/TransitionLayer';
 import '@fontsource-variable/instrument-sans/wdth.css';
+import '@fontsource/caveat/500.css';
+import '@fontsource/caveat/600.css';
+import '@fontsource/caveat/700.css';
 import './globals.css';
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
