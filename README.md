@@ -22,7 +22,13 @@ Useful URL flags:
 
 ### Tests
 
-`tests-e2e/` holds the Playwright scripts used for validation. Run them against a running server (`node tests-e2e/<script>.js`):
+`tests-e2e/` holds the Playwright scripts used for validation. Run them against a running server (`node tests-e2e/<script>.js`). `qa-*.js` are the regression tests added after the first QA pass:
+- `qa-phone-back.js`, `qa-phone-race.js`: phone → project → Back (link, browser Back, and clicking Back instantly mid-transition) must land on the held phone with no stuck transition layer
+- `qa-persist.js`: the desk survives navigation (instant return, same canvas, nothing focusable while hidden, nav Contact still goes to /contact)
+- `qa-assistant-email.js`, `qa-notebook-email.js`: assistant chips / prediction / unrelated-question replies, and "Email me" never opening a blank tab
+- `qa-viewports.js`: screenshots of the desk framing at many window sizes (`SIZES="1526x758,390x844" TAG=name`)
+
+Older scripts:
 - `journey.js`, `journey2.js`: full device journeys, including the shared transition and Back restoration
 - `kb.js`: keyboard-only journey, plus a check that direct case-study URLs load no WebGL
 - `audio.js`: checks that sound stays muted until enabled, and measures the output signal
@@ -51,6 +57,8 @@ scripts/
   gen_textures.py      Procedural tileable textures (walnut, plaster, knit, brushed metal…)
   gen_covers.mjs       Placeholder project cover art (SVG) from each project's brand colour
 src/
+  components/DeskHost.tsx  Keeps the 3D desk mounted (paused + hidden) across routes so returning is instant
+  components/EmailMe.tsx   "Email me" menu: Gmail, mail app, or copy (a bare mailto: opens a blank tab for many visitors)
   data/projects.json   Single project registry (laptop, phone, /work and case studies all read it)
   app/                 Next.js App Router: / (desk), /work, /work/[slug] (static, no WebGL)
   lib/
@@ -113,7 +121,7 @@ src/
 
 ## Deploying
 
-The app is a standard Next.js app and is not deployed anywhere yet. To deploy, use Vercel (`vercel deploy`) or any Node host (`npm run build && npm start`). Every case-study route is prerendered as static HTML.
+Deployed on Vercel from `main` (every push redeploys). Any Node host also works (`npm run build && npm start`). Every case-study route is prerendered as static HTML.
 
 ## Private preview build
 

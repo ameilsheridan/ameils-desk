@@ -3,6 +3,7 @@ import { useState } from 'react';
 import contact from '@/data/contact.json';
 import { sfx } from '@/lib/audio';
 import { asset } from '@/lib/asset';
+import EmailMe from '@/components/EmailMe';
 
 /** "Say hello" card: shown on the open notebook and on /contact. Empty links and résumé are hidden. */
 export default function ContactCard({ onClose, headingId = 'contact-title' }: { onClose?: () => void; headingId?: string }) {
@@ -19,11 +20,10 @@ export default function ContactCard({ onClose, headingId = 'contact-title' }: { 
       <h2 id={headingId} tabIndex={-1}>Say hello</h2>
       <p className="contact-intro">{contact.intro}</p>
       <div className="contact-actions">
-        {/* opens the mail app in a new context, so the desk is never replaced by a blank page */}
-        <a className="contact-primary" href={`mailto:${contact.email}`} target="_blank" rel="noopener noreferrer" onClick={() => sfx('tap')}>
-          <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"><path d="M3 5h14v10H3z" /><path d="M3.5 5.5L10 11l6.5-5.5" /></svg>
-          Email me
-        </a>
+        <EmailMe
+          className="contact-primary"
+          icon={<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"><path d="M3 5h14v10H3z" /><path d="M3.5 5.5L10 11l6.5-5.5" /></svg>}
+        />
         <button
           type="button"
           className="contact-copy"

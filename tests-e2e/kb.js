@@ -14,7 +14,7 @@ const { chromium } = require('playwright');
   await p.goto('http://localhost:3000/?quality=light', { waitUntil: 'networkidle' });
   await p.waitForFunction(() => window.__desk && window.__desk.store.getState().mode === 'desk', null, { timeout: 300000 });
   const seq = [];
-  for (let i = 0; i < 12; i++) {
+  for (let i = 0; i < 30; i++) {
     await p.keyboard.press('Tab');
     const t = await p.evaluate(() => document.activeElement?.textContent?.trim().slice(0, 40));
     seq.push(t);

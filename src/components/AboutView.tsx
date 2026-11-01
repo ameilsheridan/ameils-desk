@@ -5,6 +5,7 @@ import { asset } from '@/lib/asset';
 import { getProject } from '@/lib/projects';
 import resume from '@/data/resume.json';
 import contact from '@/data/contact.json';
+import EmailMe from '@/components/EmailMe';
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -72,7 +73,7 @@ export default function AboutView() {
             </dl>
             <div className="glance-actions">
               {resumeHref ? <a className="proto-cta" href={resumeHref} download>Download résumé</a> : null}
-              <a className={resumeHref ? 'btn-ghost' : 'proto-cta'} href={`mailto:${contact.email}`} target="_blank" rel="noopener noreferrer">Email me</a>
+              <EmailMe className={resumeHref ? 'btn-ghost' : 'proto-cta'} />
             </div>
           </section>
 
@@ -169,7 +170,7 @@ export default function AboutView() {
             <h2 id="s-hire">Hiring for a product designer?</h2>
             <p>I&rsquo;d love to hear about the problem your team is solving.</p>
             <div className="glance-actions">
-              <a className="proto-cta" href={`mailto:${contact.email}`} target="_blank" rel="noopener noreferrer">Email me</a>
+              <EmailMe className="proto-cta" />
               {resumeHref ? <a className="btn-ghost" href={resumeHref} download>Download résumé</a> : <Link className="btn-ghost" href="/work">See the work</Link>}
             </div>
           </section>

@@ -3,9 +3,6 @@ import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { detectTier, type Tier } from '@/lib/quality';
-import { consumeReturn, type ReturnContext } from '@/lib/restore';
-import { useTransitionStore } from '@/lib/transition';
-import { engine } from '@/lib/audio';
 import { projects } from '@/lib/projects';
 import { asset } from '@/lib/asset';
 
@@ -14,20 +11,15 @@ const Experience = dynamic(() => import('@/experience/Experience'), { ssr: false
 /** Picks a quality tier on the client and loads the 3D desk, or a static fallback. */
 export default function ExperienceLoader() {
   const [tier, setTier] = useState<Tier | null>(null);
-  const [restore, setRestore] = useState<ReturnContext | null>(null);
 
+  // the desk now stays mounted across routes (see DeskHost), so this runs once
   useEffect(() => {
-    const ret = consumeReturn();
-    setRestore(ret);
     setTier(detectTier());
-    engine?.duck(false);
-    const t = useTransitionStore.getState();
-    if (t.phase === 'done') t.setPhase('idle');
   }, []);
 
   if (!tier) return <div className="experience-placeholder" aria-hidden="true" />;
   if (tier === 'static') return <StaticDesk />;
-  return <Experience tier={tier} restore={restore} />;
+  return <Experience tier={tier} restore={null} />;
 }
 
 /** No-WebGL fallback: a still of the desk plus the same projects as plain links. */

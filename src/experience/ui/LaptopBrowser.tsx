@@ -7,6 +7,7 @@ import { engine, sfx, useAudio, type Mood } from '@/lib/audio';
 import { startProjectTransition } from '@/lib/transition';
 import { overlayEls, overlaySize } from '../overlaySync';
 import contact from '@/data/contact.json';
+import EmailMe from '@/components/EmailMe';
 
 type GroupId = 'music' | 'hobby' | 'ideas' | 'work';
 type Kind = 'music' | 'playlist' | 'listening' | 'golf' | 'interests' | 'link' | 'portfolio' | 'cases' | 'experiments';
@@ -244,10 +245,10 @@ function Page({ tab, b, setB, onOpen, navigate }: {
         <div className="pg">
           <div className="pg-head">
             <h1>Selected work</h1>
-            <a className="pg-btn pg-mail" href={`mailto:${contact.email}`} target="_blank" rel="noopener noreferrer" onClick={() => sfx('tap', 0)}>
-              <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"><path d="M3 5h14v10H3z" /><path d="M3.5 5.5L10 11l6.5-5.5" /></svg>
-              Email me
-            </a>
+            <EmailMe
+              className="pg-btn pg-mail"
+              icon={<svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"><path d="M3 5h14v10H3z" /><path d="M3.5 5.5L10 11l6.5-5.5" /></svg>}
+            />
           </div>
           <div className="pg-filters" role="group" aria-label="Filter by category">
             {['All', ...categories].map((c) => (

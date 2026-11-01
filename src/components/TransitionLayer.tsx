@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 import gsap from 'gsap';
 import { heroTarget, useTransitionStore } from '@/lib/transition';
 import { prefersReducedMotion } from '@/lib/quality';
@@ -12,6 +13,25 @@ export default function TransitionLayer() {
   const { phase, src, from, slug } = useTransitionStore();
   const imgRef = useRef<HTMLImageElement>(null);
   const backRef = useRef<HTMLDivElement>(null);
+  const path = usePathname();
+  const sawCase = useRef(false);
+  const epoch = useRef(0); // bumped when the visitor leaves the case route; stale settle steps check it
+
+  // The transition belongs to the case-study route. If the visitor leaves it (Back, even mid-animation),
+  // stop everything and clear the layer so a stale image can never sit on top of the desk or block the next open.
+  useEffect(() => {
+    if (path.startsWith('/work/')) {
+      sawCase.current = true;
+      return;
+    }
+    if (sawCase.current) {
+      sawCase.current = false;
+      epoch.current++;
+      gsap.killTweensOf([imgRef.current, backRef.current]);
+      const s = useTransitionStore.getState();
+      if (s.phase !== 'idle') s.setPhase('idle');
+    }
+  }, [path]);
 
   useEffect(() => {
     if (phase !== 'expanding' || !from || !imgRef.current || !backRef.current) return;
@@ -21,11 +41,13 @@ export default function TransitionLayer() {
     const target = heroTarget();
     gsap.set(img, { x: from.x, y: from.y, width: from.w, height: from.h, borderRadius: from.r, opacity: 1 });
     gsap.set(back, { opacity: 0 });
+    const my = epoch.current;
     const tl = gsap.timeline({
       onComplete: () => {
         // settle onto the real hero element once the case page has rendered it
         let tries = 0;
         const settle = () => {
+          if (epoch.current !== my) return;
           const hero = document.querySelector<HTMLElement>(`[data-hero="${slug}"]`);
           if (!hero && tries++ < 60) return requestAnimationFrame(settle);
           if (hero) {
@@ -35,7 +57,7 @@ export default function TransitionLayer() {
           useTransitionStore.getState().setPhase('settling');
           gsap.to([img, back], {
             opacity: 0, duration: 0.3, delay: 0.2, ease: 'power1.out',
-            onComplete: () => useTransitionStore.getState().setPhase('done'),
+            onComplete: () => { if (epoch.current === my) useTransitionStore.getState().setPhase('done'); },
           });
         };
         settle();

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import TransitionLayer from '@/components/TransitionLayer';
 import Assistant from '@/components/Assistant';
+import DeskHost from '@/components/DeskHost';
 import '@fontsource-variable/instrument-sans/wdth.css';
 import '@fontsource/caveat/500.css';
 import '@fontsource/caveat/600.css';
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <a className="skip" href="#main">Skip to content</a>
+        <DeskHost />
         {children}
         <TransitionLayer />
         <Assistant />

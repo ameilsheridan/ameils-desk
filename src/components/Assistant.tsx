@@ -1,9 +1,10 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { localAnswer, SUGGESTED, type Answer } from '@/lib/faq';
+import { followUps, localAnswer, predict, type Answer } from '@/lib/faq';
+import EmailMe from '@/components/EmailMe';
 
-type Msg = { role: 'user' | 'assistant'; content: string; links?: Answer['links'] };
+type Msg = { role: 'user' | 'assistant'; content: string; links?: Answer['links']; suggest?: string[] };
 
 /** Floating "Ask about Ameil" assistant (FAQ). */
 export default function Assistant() {
@@ -11,6 +12,8 @@ export default function Assistant() {
   const [msgs, setMsgs] = useState<Msg[]>([{ role: 'assistant', content: "Hi! I'm Ameil's portfolio assistant. Ask me about his experience, projects or availability." }]);
   const [input, setInput] = useState('');
   const [busy, setBusy] = useState(false);
+  const [asked, setAsked] = useState<string[]>([]);
+  const [lastIntent, setLastIntent] = useState<string | undefined>();
   const listRef = useRef<HTMLOListElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -27,6 +30,7 @@ export default function Assistant() {
     const question = q.trim();
     if (!question || busy) return;
     setInput('');
+    setAsked((a) => [...a, question]);
     const history = msgs.slice(1).map(({ role, content }) => ({ role, content }));
     setMsgs((m) => [...m, { role: 'user', content: question }]);
     setBusy(true);
@@ -41,9 +45,14 @@ export default function Assistant() {
     } catch {
       ans = localAnswer(question); // static hosting or offline
     }
-    setMsgs((m) => [...m, { role: 'assistant', content: ans.text, links: ans.links }]);
+    // a model answer carries no intent; derive it locally so the follow-up chips still make sense
+    setLastIntent(ans.intent ?? localAnswer(question).intent ?? lastIntent);
+    setMsgs((m) => [...m, { role: 'assistant', content: ans.text, links: ans.links, suggest: ans.suggest }]);
     setBusy(false);
   };
+
+  const predicted = predict(input);
+  const chips = predicted.length ? { typing: true, list: predicted } : { typing: false, list: followUps(lastIntent, asked, 4) };
 
   return (
     <div className={`assistant ${open ? 'is-open' : ''}`}>
@@ -62,18 +71,23 @@ export default function Assistant() {
                 <p>{m.content}</p>
                 {m.links?.length ? (
                   <span className="msg-links">
-                    {m.links.map((l) => (l.href.startsWith('/') ? <Link key={l.href} href={l.href} onClick={() => setOpen(false)}>{l.label}</Link> : <a key={l.href} href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a>))}
+                    {m.links.map((l) => (l.href.startsWith('/') ? <Link key={l.href} href={l.href} onClick={() => setOpen(false)}>{l.label}</Link> : l.href.startsWith('mailto:') ? <EmailMe key={l.href} inline>{l.label}</EmailMe> : <a key={l.href} href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a>))}
+                  </span>
+                ) : null}
+                {m.suggest?.length ? (
+                  <span className="msg-suggest">
+                    {m.suggest.map((s) => <button key={s} type="button" onClick={() => ask(s)} disabled={busy}>{s}</button>)}
                   </span>
                 ) : null}
               </li>
             ))}
             {busy ? <li className="msg msg--assistant msg--typing" aria-label="Thinking"><i /><i /><i /></li> : null}
           </ol>
-          {msgs.length < 3 ? (
-            <ul className="assistant-suggest" aria-label="Suggested questions">
-              {SUGGESTED.map((s) => <li key={s}><button type="button" onClick={() => ask(s)}>{s}</button></li>)}
-            </ul>
-          ) : null}
+          {/* always visible: follow-ups to the last answer, or live predictions while the visitor types */}
+          <ul className="assistant-suggest" aria-label={chips.typing ? 'Did you mean' : 'Suggested questions'}>
+            {chips.typing ? <li className="assistant-suggest-label" aria-hidden="true">Did you mean</li> : null}
+            {chips.list.map((s) => <li key={s}><button type="button" onClick={() => ask(s)} disabled={busy}>{s}</button></li>)}
+          </ul>
           <form className="assistant-form" onSubmit={(e) => { e.preventDefault(); void ask(input); }}>
             <label className="sr-only" htmlFor="assistant-input">Your question</label>
             <input id="assistant-input" ref={inputRef} value={input} onChange={(e) => setInput(e.target.value)} placeholder="Ask a question…" maxLength={500} autoComplete="off" />

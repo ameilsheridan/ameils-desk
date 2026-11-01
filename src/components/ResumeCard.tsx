@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import resume from '@/data/resume.json';
 import contact from '@/data/contact.json';
+import EmailMe from '@/components/EmailMe';
 import { asset } from '@/lib/asset';
 
 /** Readable résumé summary shown when the camera leans over the printed page on the desk. */
@@ -29,7 +30,7 @@ export default function ResumeCard({ onClose, headingId = 'resume-title' }: { on
       <div className="contact-actions">
         {pdf ? <a className="contact-primary" href={pdf} download>Download PDF</a> : null}
         <Link className={pdf ? 'contact-copy' : 'contact-primary'} href="/about">Full experience</Link>
-        <a className="contact-copy" href={`mailto:${contact.email}`} target="_blank" rel="noopener noreferrer">Email me</a>
+        <EmailMe className="contact-copy" />
       </div>
     </div>
   );

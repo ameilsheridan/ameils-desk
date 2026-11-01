@@ -4,11 +4,11 @@ import ExperienceLoader from '@/components/ExperienceLoader';
 import IntroActions from '@/components/IntroActions';
 import { projects } from '@/lib/projects';
 
-export default function HomeView() {
+export default function HomeView({ active = true }: { active?: boolean }) {
   return (
     <div className="home">
       <TopNav />
-      <main id="main">
+      <main id={active ? 'main' : undefined}>
         <div className="intro">
           <p className="intro-eyebrow"><i aria-hidden="true" />Product designer in Kuala Lumpur</p>
           <h1>Hi, I&rsquo;m Ameil.</h1>

@@ -12,10 +12,13 @@ export function cameraPose(aspect: number, lean = 0): Pose {
   let position: THREE.Vector3, target: THREE.Vector3, fov: number;
   if (aspect >= 1.15) {
     const hfov = 66;
+    // Very wide, short windows (laptops with browser chrome, ultrawide) get a taller vertical view and a slightly
+    // lower aim, so the laptop base and the phone keep clear space below instead of touching the bottom edge.
+    const wide = THREE.MathUtils.clamp((aspect - 1.55) / 0.6, 0, 1);
     fov = THREE.MathUtils.clamp(
-      THREE.MathUtils.radToDeg(2 * Math.atan(Math.tan(THREE.MathUtils.degToRad(hfov / 2)) / aspect)), 34, 52);
+      THREE.MathUtils.radToDeg(2 * Math.atan(Math.tan(THREE.MathUtils.degToRad(hfov / 2)) / aspect)), 34 + 8 * wide, 52);
     position = new THREE.Vector3(-0.07, 1.17, 0.6);
-    target = new THREE.Vector3(-0.04, 0.86, -0.38);
+    target = new THREE.Vector3(-0.04, 0.86 - 0.045 * wide, -0.38);
   } else {
     fov = aspect < 0.8 ? 60 : 54;
     // look across the room toward the street window rather than down at the table
