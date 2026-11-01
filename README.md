@@ -118,3 +118,13 @@ The app is a standard Next.js app and is not deployed anywhere yet. To deploy, u
 ## Private preview build
 
 `npm run preview:build` makes `dist-preview/`, a relative-path static build of the same components. It uses hash routes (`#work`, `#work-phis`) and bundles the uncompressed model inside the JavaScript. It's meant for hosts that serve only static files from a subfolder, such as a Claude artifact. The Next.js app stays the real site.
+
+## Publishing (GitHub + Vercel)
+
+1. Push this folder to a GitHub repo (e.g. `ameilsheridan/ameils-desk`).
+2. In Vercel, import the repo. Framework: Next.js, no extra settings needed.
+3. Add the environment variable `NEXT_PUBLIC_SITE_URL` = your final URL (used for the sitemap, robots and social previews).
+4. Every push to `main` deploys to production; every other branch gets a preview URL.
+5. Optional: add a custom domain in Vercel (Project → Settings → Domains) and turn on Vercel Web Analytics.
+
+Contact details shown on the notebook and /contact live in `src/data/contact.json` (links with an empty `href` are hidden).
