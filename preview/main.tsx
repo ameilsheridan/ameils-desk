@@ -12,6 +12,7 @@ import CaseStudyView from '@/components/CaseStudyView';
 import AboutView from '@/components/AboutView';
 import ContactView from '@/components/ContactView';
 import TransitionLayer from '@/components/TransitionLayer';
+import Assistant from '@/components/Assistant';
 import { getProject } from '@/lib/projects';
 import { useDesk } from '@/lib/store';
 
@@ -53,6 +54,7 @@ function App() {
       {r.view === 'contact' && <ContactView />}
       {p && <CaseStudyView key={p.slug} p={p} />}
       <TransitionLayer />
+      <Assistant />
     </>
   );
 }

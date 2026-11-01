@@ -5,7 +5,7 @@ import { create } from 'zustand';
 export type Mode = 'loading' | 'desk' | 'toLaptop' | 'laptop' | 'toPhone' | 'phone' | 'returning' | 'sipping' | 'toNote' | 'note';
 export type Device = 'laptop' | 'phone';
 /** Everything on the desk that reacts to a click. */
-export type Prop = Device | 'cup' | 'notebook';
+export type Prop = Device | 'cup' | 'notebook' | 'resume';
 /** Sub-phase used by the director to sequence hands, device and camera. */
 export type Phase = 'idle' | 'reach' | 'grip' | 'lift' | 'hold' | 'press' | 'zoom' | 'lower' | 'release';
 
@@ -37,6 +37,9 @@ type State = {
   hintDismissed: boolean;
   /** desk kept alive but hidden (static preview keeps it mounted under case studies) */
   paused: boolean;
+  /** which paper the camera leans over in 'note' mode */
+  paper: 'notebook' | 'resume';
+  setPaper: (p: 'notebook' | 'resume') => void;
   modeSince: number;
   setPaused: (p: boolean) => void;
   setMode: (m: Mode) => void;
@@ -57,6 +60,8 @@ export const useDesk = create<State>((set) => ({
   overlayVisible: false,
   hintDismissed: false,
   paused: false,
+  paper: 'notebook',
+  setPaper: (paper) => set({ paper }),
   modeSince: 0,
   setPaused: (paused) => set({ paused }),
   setMode: (mode) => set({ mode, modeSince: typeof performance !== 'undefined' ? performance.now() : 0 }),

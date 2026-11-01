@@ -83,58 +83,79 @@ function Garland({ count = 64 }: { count?: number }) {
 
 type Person = { root: THREE.Group; head: THREE.Object3D; torso: THREE.Object3D; seed: number };
 
+/** A capsule-ish limb running from a to b (in the parent's space). */
+function limb(parent: THREE.Object3D, a: THREE.Vector3, b: THREE.Vector3, r0: number, r1: number, mat: THREE.Material) {
+  const len = a.distanceTo(b);
+  const g = new THREE.CylinderGeometry(r1, r0, len, 14, 1);
+  const m = new THREE.Mesh(g, mat);
+  m.position.copy(a).add(b).multiplyScalar(0.5);
+  m.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), b.clone().sub(a).normalize());
+  parent.add(m);
+  for (const [p, r] of [[a, r0], [b, r1]] as const) {
+    const j = new THREE.Mesh(new THREE.SphereGeometry(r, 14, 10), mat);
+    j.position.copy(p);
+    parent.add(j);
+  }
+}
+
+/**
+ * Seated café patron: a soft, stylised figure (tapered torso, shoulders, elbows resting on
+ * the table, hands together) kept low in contrast so it reads as ambience, not as a character.
+ */
 function makePerson(opts: { sweater: string; skin: string; hair: string; long?: boolean; holding: 'book' | 'cup' }): Person {
   const root = new THREE.Group();
-  const sweater = new THREE.MeshStandardMaterial({ color: opts.sweater, roughness: 0.9 });
-  const skin = new THREE.MeshStandardMaterial({ color: opts.skin, roughness: 0.65 });
-  const hair = new THREE.MeshStandardMaterial({ color: opts.hair, roughness: 0.8 });
+  const sweater = new THREE.MeshStandardMaterial({ color: opts.sweater, roughness: 0.95 });
+  const skin = new THREE.MeshStandardMaterial({ color: opts.skin, roughness: 0.7 });
+  const hair = new THREE.MeshStandardMaterial({ color: opts.hair, roughness: 0.85 });
   const torso = new THREE.Group();
   torso.position.y = 0.47;
   root.add(torso);
-  const body = new THREE.Mesh(new THREE.CapsuleGeometry(0.17, 0.32, 8, 20), sweater);
-  body.scale.set(1.05, 1, 0.72);
-  body.position.y = 0.27;
+  // tapered torso: waist, chest, rounded shoulders
+  const profile = [[0.0, 0], [0.13, 0.0], [0.145, 0.12], [0.16, 0.3], [0.185, 0.41], [0.17, 0.48], [0.11, 0.53], [0.05, 0.555], [0, 0.56]]
+    .map(([r, y]) => new THREE.Vector2(r, y));
+  const body = new THREE.Mesh(new THREE.LatheGeometry(profile, 28), sweater);
+  body.scale.set(1, 1, 0.68);
   torso.add(body);
-  const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.06, 0.08, 12), skin);
-  neck.position.y = 0.58;
+  const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.042, 0.05, 0.09, 12), skin);
+  neck.position.y = 0.59;
   torso.add(neck);
   const head = new THREE.Group();
   head.position.y = 0.7;
   torso.add(head);
-  const face = new THREE.Mesh(new THREE.SphereGeometry(0.105, 24, 18), skin);
-  face.scale.set(0.95, 1.08, 1);
+  const face = new THREE.Mesh(new THREE.SphereGeometry(0.092, 24, 18), skin);
+  face.scale.set(0.9, 1.12, 0.98);
   head.add(face);
-  const hairCap = new THREE.Mesh(new THREE.SphereGeometry(0.112, 24, 18, 0, Math.PI * 2, 0, Math.PI * 0.55), hair);
-  hairCap.position.set(0, 0.02, -0.008);
-  hairCap.rotation.x = -0.25;
+  const hairCap = new THREE.Mesh(new THREE.SphereGeometry(0.1, 24, 18, 0, Math.PI * 2, 0, Math.PI * 0.58), hair);
+  hairCap.scale.set(0.95, 1.05, 1.02);
+  hairCap.position.set(0, 0.018, -0.012);
+  hairCap.rotation.x = -0.3;
   head.add(hairCap);
   if (opts.long) {
-    const back = new THREE.Mesh(new THREE.CapsuleGeometry(0.095, 0.16, 6, 14), hair);
-    back.position.set(0, -0.08, -0.05);
+    const back = new THREE.Mesh(new THREE.CapsuleGeometry(0.08, 0.14, 6, 14), hair);
+    back.scale.set(1.1, 1, 0.7);
+    back.position.set(0, -0.09, -0.055);
     head.add(back);
   }
-  // forearms resting toward the table, hands together holding a book or cup
+  // arms: shoulder -> elbow resting forward -> hands meeting in front of the chest
   for (const sx of [-1, 1]) {
-    const upper = new THREE.Mesh(new THREE.CapsuleGeometry(0.055, 0.22, 6, 12), sweater);
-    upper.position.set(sx * 0.19, 0.3, 0.05);
-    upper.rotation.set(0.5, 0, sx * 0.15);
-    torso.add(upper);
-    const fore = new THREE.Mesh(new THREE.CapsuleGeometry(0.048, 0.24, 6, 12), sweater);
-    fore.position.set(sx * 0.12, 0.29, 0.25);
-    fore.rotation.set(1.35, 0, -sx * 0.55);
-    torso.add(fore);
-    const hand = new THREE.Mesh(new THREE.SphereGeometry(0.04, 12, 10), skin);
-    hand.position.set(sx * 0.05, 0.33, 0.38);
+    const sh = new THREE.Vector3(sx * 0.165, 0.45, 0);
+    const el = new THREE.Vector3(sx * 0.19, 0.2, 0.17);
+    const wr = new THREE.Vector3(sx * 0.06, 0.3, 0.33);
+    limb(torso, sh, el, 0.05, 0.042, sweater);
+    limb(torso, el, wr, 0.042, 0.034, sweater);
+    const hand = new THREE.Mesh(new THREE.CapsuleGeometry(0.026, 0.035, 4, 10), skin);
+    hand.position.copy(wr).add(new THREE.Vector3(-sx * 0.012, 0.01, 0.035));
+    hand.rotation.set(1.2, 0, sx * 0.5);
     torso.add(hand);
   }
   if (opts.holding === 'book') {
-    const book = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.015, 0.16), new THREE.MeshStandardMaterial({ color: '#efe5d2', roughness: 0.9 }));
-    book.position.set(0, 0.37, 0.4);
-    book.rotation.x = -0.9;
+    const book = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.012, 0.15), new THREE.MeshStandardMaterial({ color: '#d9cdb8', roughness: 0.9 }));
+    book.position.set(0, 0.33, 0.39);
+    book.rotation.x = -0.95;
     torso.add(book);
   } else {
-    const cup = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.032, 0.09, 16), new THREE.MeshStandardMaterial({ color: '#e9e1d4', roughness: 0.4 }));
-    cup.position.set(0, 0.38, 0.4);
+    const cup = new THREE.Mesh(new THREE.CylinderGeometry(0.036, 0.03, 0.08, 16), new THREE.MeshStandardMaterial({ color: '#d8d0c3', roughness: 0.4 }));
+    cup.position.set(0, 0.35, 0.39);
     torso.add(cup);
   }
   root.traverse((o) => {
@@ -145,10 +166,10 @@ function makePerson(opts: { sweater: string; skin: string; hair: string; long?: 
 
 function Patrons() {
   const people = useMemo(() => {
-    const a = makePerson({ sweater: '#b8743e', skin: '#d9a07a', hair: '#2a1b14', long: true, holding: 'book' });
+    const a = makePerson({ sweater: '#7d5a3e', skin: '#b98a6b', hair: '#231812', long: true, holding: 'book' });
     a.root.position.set(1.85, 0, -3.62);
     a.root.rotation.y = 2.25; // gazing out of the window
-    const b = makePerson({ sweater: '#3f5a54', skin: '#a8714f', hair: '#1a1210', holding: 'cup' });
+    const b = makePerson({ sweater: '#3a4744', skin: '#9a6b52', hair: '#17110e', holding: 'cup' });
     b.root.position.set(-1.75, 0, -3.48);
     b.root.rotation.y = 1.25; // in profile, cup in hand
     return [a, b];
@@ -161,7 +182,7 @@ function Patrons() {
       // reading posture with the occasional glance up / toward the window
       const glance = Math.max(0, Math.sin(t * 0.13 + s)) ** 6;
       p.head.rotation.x = 0.35 - glance * 0.35 + Math.sin(t * 0.7 + s) * 0.02;
-      p.head.rotation.y = Math.sin(t * 0.21 + s) * 0.12 + glance * 0.5;
+      p.head.rotation.y = Math.sin(t * 0.21 + s) * 0.08 + glance * 0.35;
     }
   });
   return <>{people.map((p, i) => <primitive key={i} object={p.root} />)}</>;

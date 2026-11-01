@@ -15,6 +15,9 @@ export const rig = {
   cup: null as THREE.Object3D | null,
   notebook: null as THREE.Object3D | null,
   notebookCover: null as THREE.Object3D | null,
+  resume: null as THREE.Object3D | null,
+  /** live world position of the lifted cup */
+  cupWorld: new THREE.Vector3(),
   deskPhone: { pos: new THREE.Vector3(), quat: new THREE.Quaternion() },
   holdPhone: { pos: new THREE.Vector3(), quat: new THREE.Quaternion() },
   pointer: new THREE.Vector3(),

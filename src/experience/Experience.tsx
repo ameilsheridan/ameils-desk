@@ -5,6 +5,7 @@ import { PerformanceMonitor, useProgress } from '@react-three/drei';
 import * as THREE from 'three';
 import { useDesk, type Prop } from '@/lib/store';
 import ContactCard from '@/components/ContactCard';
+import ResumeCard from '@/components/ResumeCard';
 import { prefersReducedMotion, settingsFor, type Tier } from '@/lib/quality';
 import type { ReturnContext } from '@/lib/restore';
 import Scene from './Scene';
@@ -66,7 +67,7 @@ function DeviceHotspots() {
   const mode = useDesk((s) => s.mode);
   const setHover = useDesk((s) => s.setHover);
   const active = mode === 'desk';
-  const btn = (d: Prop, label: string, ref: 'hotLaptop' | 'hotPhone' | 'hotCup' | 'hotNote') => (
+  const btn = (d: Prop, label: string, ref: 'hotLaptop' | 'hotPhone' | 'hotCup' | 'hotNote' | 'hotResume') => (
     <button
       ref={(el) => { overlayEls[ref] = el; }}
       type="button"
@@ -75,7 +76,7 @@ function DeviceHotspots() {
       aria-hidden={!active}
       onFocus={() => active && setHover(d)}
       onBlur={() => useDesk.getState().hover === d && setHover(null)}
-      onClick={() => (d === 'laptop' ? openLaptop() : d === 'phone' ? openPhone() : d === 'cup' ? sipCoffee() : openNotebook())}
+      onClick={() => (d === 'laptop' ? openLaptop() : d === 'phone' ? openPhone() : d === 'cup' ? sipCoffee() : openNotebook(d === 'resume' ? 'resume' : 'notebook'))}
     >
       <span className="hotspot-ring" aria-hidden="true" />
       <span className="hotspot-label">{label}</span>
@@ -86,6 +87,7 @@ function DeviceHotspots() {
       {btn('laptop', 'Open the laptop — browse work', 'hotLaptop')}
       {btn('phone', 'Pick up the phone — browse projects', 'hotPhone')}
       {btn('notebook', 'Open the notebook — contact', 'hotNote')}
+      {btn('resume', 'Read my résumé', 'hotResume')}
       {btn('cup', 'Take a sip of coffee', 'hotCup')}
     </div>
   );
@@ -93,13 +95,16 @@ function DeviceHotspots() {
 
 function NoteCard() {
   const mode = useDesk((s) => s.mode);
+  const paper = useDesk((s) => s.paper);
   const open = mode === 'note';
+  const id = paper === 'resume' ? 'note-resume-title' : 'note-contact-title';
   useEffect(() => {
-    if (open) document.getElementById('note-contact-title')?.focus({ preventScroll: true });
-  }, [open]);
+    if (open) document.getElementById(id)?.focus({ preventScroll: true });
+  }, [open, id]);
+  const close = () => void backToDesk().then(() => (paper === 'resume' ? overlayEls.hotResume : overlayEls.hotNote)?.focus({ preventScroll: true }));
   return (
-    <section className={`note-card ${open ? 'is-open' : ''}`} aria-hidden={!open} inert={!open} aria-labelledby="note-contact-title">
-      <ContactCard onClose={() => void backToDesk().then(() => overlayEls.hotNote?.focus({ preventScroll: true }))} headingId="note-contact-title" />
+    <section className={`note-card ${open ? 'is-open' : ''}`} aria-hidden={!open} inert={!open} aria-labelledby={id}>
+      {paper === 'resume' ? <ResumeCard onClose={close} headingId={id} /> : <ContactCard onClose={close} headingId={id} />}
     </section>
   );
 }
@@ -111,7 +116,7 @@ function DeviceBar() {
     <div className={`device-bar ${show ? 'is-visible' : ''}`}>
       <button type="button" tabIndex={show ? 0 : -1} aria-hidden={!show} onClick={() => backToDesk()}>
         <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
-        {mode === 'phone' ? 'Put phone down' : mode === 'note' ? 'Close notebook' : 'Back to desk'}
+        {mode === 'phone' ? 'Put phone down' : mode === 'note' ? (useDesk.getState().paper === 'resume' ? 'Put résumé down' : 'Close notebook') : 'Back to desk'}
         <kbd>Esc</kbd>
       </button>
     </div>

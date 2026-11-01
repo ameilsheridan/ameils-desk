@@ -157,16 +157,17 @@ export async function sipCoffee() {
 }
 
 /** Lean over the notebook, open it and show the contact card. */
-export async function openNotebook() {
+export async function openNotebook(paper: 'notebook' | 'resume' = 'notebook') {
   const s = useDesk.getState();
   if (s.mode !== 'desk') return;
   const my = ++token;
   s.setHover(null);
+  s.setPaper(paper);
   s.setMode('toNote');
   sfx('page', -0.5);
   await Promise.all([
     tween({ camNote: 1, duration: rig.reduced ? 0.01 : 1.0, ease: 'power3.inOut' }),
-    new Promise<void>((resolve) => gsap.to(rig.anim, { noteOpen: 1, duration: rig.reduced ? 0.01 : 0.9, delay: rig.reduced ? 0 : 0.35, ease: 'power2.inOut', overwrite: 'auto', onComplete: () => resolve(), onInterrupt: () => resolve() })),
+    new Promise<void>((resolve) => gsap.to(rig.anim, { noteOpen: paper === 'notebook' ? 1 : 0, duration: rig.reduced ? 0.01 : 0.9, delay: rig.reduced ? 0 : 0.35, ease: 'power2.inOut', overwrite: 'auto', onComplete: () => resolve(), onInterrupt: () => resolve() })),
   ]);
   if (my !== token) return;
   s.setMode('note');

@@ -12,6 +12,7 @@ export const overlayEls = {
   hotPhone: null as HTMLElement | null,
   hotCup: null as HTMLElement | null,
   hotNote: null as HTMLElement | null,
+  hotResume: null as HTMLElement | null,
 };
 
 /** Pixel size the DOM screens are laid out at (≈ their final on-screen size, so text stays crisp). */
@@ -91,6 +92,7 @@ export function OverlaySync() {
     place(overlayEls.hotPhone, rig.phone, 0.01);
     place(overlayEls.hotCup, rig.cup, 0.04);
     place(overlayEls.hotNote, rig.notebook, 0.01);
+    place(overlayEls.hotResume, rig.resume, 0.01);
   });
   return null;
 }

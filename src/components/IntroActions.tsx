@@ -24,6 +24,9 @@ export default function IntroActions() {
         <li><Link href="/contact" onClick={run('openNotebook')}>
           <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 3h9v14H5zM8 7h4M8 10h4" /></svg>
           Say hello</Link></li>
+        <li><Link href="/about" onClick={(e) => { const d = (window as unknown as { __desk?: { openNotebook: (p: string) => Promise<void>; store: { getState: () => { mode: string } } } }).__desk; if (d) { e.preventDefault(); if (d.store.getState().mode === 'desk') void d.openNotebook('resume'); } }}>
+          <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 2.5h7l3 3V17.5H5zM8 9h5M8 12h5M8 6h2" /></svg>
+          Résumé</Link></li>
         <li><a href="#main" onClick={run('sipCoffee')}>
           <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 8h10v4a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4zM14 9h1.5a2 2 0 0 1 0 4H14M7 4v2M10 4v2" /></svg>
           Take a sip</a></li>

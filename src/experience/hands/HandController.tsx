@@ -8,6 +8,7 @@ import { handBus, type HandSide } from '../handBus';
 import { rig, screenInfo, screenPointToWorld, type ScreenInfo } from '../rig';
 import { HandRig, POSES, clonePose, dampPose, type Pose, type PoseName } from './HandRig';
 import type { TexSet } from '../materials';
+import { cupHandViewmodel, cupHoldWorld } from '../DeskProps';
 import { GRIP, basisQuat } from './grips';
 import { createHandMaterials } from '../materials';
 
@@ -56,6 +57,7 @@ export default function HandController({ textures }: { textures: TexSet }) {
     fwd: new THREE.Vector3(), right: new THREE.Vector3(), up: new THREE.Vector3(),
     tip: new THREE.Vector3(), target: new THREE.Vector3(), q: new THREE.Quaternion(),
     phoneInfo: null as ScreenInfo | null, laptopInfo: null as ScreenInfo | null,
+    vmPos: new THREE.Vector3(), vmQuat: new THREE.Quaternion(),
     m: new THREE.Matrix4(),
   });
 
@@ -167,13 +169,23 @@ export default function HandController({ textures }: { textures: TexSet }) {
         if (phase === 'reach') return { state: 'reaching', pose: 'reach', pos: pos.add(new THREE.Vector3(0.015, 0.025, 0.02)), quat: cq, smooth: 0.16 };
         if (phase === 'grip') return { state: 'grabbing', pose: 'mug', pos, quat: cq, smooth: 0.05 };
         if (phase === 'release') return { state: 'releasing', pose: 'reach', pos: pos.add(new THREE.Vector3(0.02, 0.035, 0.03)), quat: cq, smooth: 0.14 };
-        if (phase === 'lift' || phase === 'hold' || phase === 'lower') return { state: 'holding', pose: 'mug', pos, quat: cq, smooth: 0, attached: true };
+        if (phase === 'lift' || phase === 'hold' || phase === 'lower') {
+          // blend from the real grip on the desk to the camera-relative viewmodel pose
+          const k = THREE.MathUtils.smoothstep(rig.anim.sipT, 0.35, 0.95);
+          if (k > 0) {
+            cupHoldWorld(1, rig.anim.sipTilt, t.vmPos, t.vmQuat);
+            cupHandViewmodel(rig.anim.sipTilt, rig.cupWorld, t.vmPos, t.vmQuat);
+            pos.lerp(t.vmPos, k);
+            cq.slerp(t.vmQuat, k);
+          }
+          return { state: 'holding', pose: 'mug', pos, quat: cq, smooth: 0, attached: true };
+        }
       }
       // notebook: the right hand drifts over to rest a finger near the cover's corner
-      const nbk = rig.notebook;
-      if (nbk && mode === 'desk' && hover === 'notebook') {
+      const nbk = hover === 'resume' ? rig.resume : rig.notebook;
+      if (nbk && mode === 'desk' && (hover === 'notebook' || hover === 'resume')) {
         nbk.updateWorldMatrix(true, false);
-        const corner = new THREE.Vector3(0.05, 0.012, 0.08).applyMatrix4(nbk.matrixWorld);
+        const corner = (hover === 'resume' ? new THREE.Vector3(0.06, -0.09, 0.003) : new THREE.Vector3(0.05, 0.012, 0.08)).applyMatrix4(nbk.matrixWorld);
         const rel = rig.pointer.clone().sub(corner);
         corner.x += THREE.MathUtils.clamp(rel.x * 0.08, -0.015, 0.015);
         corner.z += THREE.MathUtils.clamp(rel.z * 0.08, -0.015, 0.015);

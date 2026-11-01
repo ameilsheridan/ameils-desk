@@ -128,3 +128,10 @@ The app is a standard Next.js app and is not deployed anywhere yet. To deploy, u
 5. Optional: add a custom domain in Vercel (Project → Settings → Domains) and turn on Vercel Web Analytics.
 
 Contact details shown on the notebook and /contact live in `src/data/contact.json` (links with an empty `href` are hidden).
+
+## Portfolio assistant
+
+The "Ask about me" assistant answers from `src/data/resume.json`, `src/data/projects.json` and `src/data/contact.json`.
+- Without configuration it uses built-in answers (`src/lib/faq.ts`).
+- To let Claude write the answers, add `ANTHROPIC_API_KEY` in Vercel (Project → Settings → Environment Variables). Optional: `ASSISTANT_MODEL`.
+  Answers are restricted to those data files, with a per-visitor rate limit.

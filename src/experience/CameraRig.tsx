@@ -37,12 +37,14 @@ export default function CameraRig() {
         pose.target.lerp(lp.target, a.camLaptop);
       }
     }
-    if (a.camNote > 0 && rig.notebook) {
-      // lean over the open notebook; on wide screens it sits left of centre, leaving room for the card
-      const c = rig.notebook.getWorldPosition(_nb);
+    const paperObj = useDesk.getState().paper === 'resume' ? rig.resume : rig.notebook;
+    if (a.camNote > 0 && paperObj) {
+      // lean over the open notebook / résumé; on wide screens it sits left of centre, leaving room for the card
+      const c = paperObj.getWorldPosition(_nb);
       const wide = aspect > 1.15;
-      _np.set(c.x + (wide ? 0.2 : 0.06), c.y + (wide ? 0.4 : 0.5), c.z + (wide ? 0.34 : 0.3));
-      _nt.set(c.x + (wide ? 0.17 : -0.06), c.y, c.z + (wide ? -0.02 : 0.08));
+      const res = paperObj === rig.resume;
+      _np.set(c.x + (wide ? (res ? 0.15 : 0.2) : 0.04), c.y + (wide ? (res ? 0.42 : 0.4) : 0.5), c.z + (wide ? (res ? 0.24 : 0.34) : 0.3));
+      _nt.set(c.x + (wide ? (res ? 0.16 : 0.17) : -0.04), c.y, c.z + (wide ? -0.03 : 0.08));
       const k = THREE.MathUtils.smoothstep(a.camNote, 0, 1);
       pose.position.lerp(_np, k);
       pose.target.lerp(_nt, k);

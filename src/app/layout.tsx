@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import TransitionLayer from '@/components/TransitionLayer';
+import Assistant from '@/components/Assistant';
 import '@fontsource-variable/instrument-sans/wdth.css';
 import '@fontsource/caveat/500.css';
 import '@fontsource/caveat/600.css';
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a className="skip" href="#main">Skip to content</a>
         {children}
         <TransitionLayer />
+        <Assistant />
       </body>
     </html>
   );

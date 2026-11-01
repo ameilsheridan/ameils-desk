@@ -78,6 +78,7 @@ export default function Scene({ q }: { q: QualitySettings }) {
       phone: new THREE.Box3().setFromObject(rig.phone!).expandByVector(new THREE.Vector3(0.035, 0.03, 0.035)),
       cup: new THREE.Box3().setFromObject(scene.getObjectByName('Latte')!).expandByScalar(0.01),
       notebook: new THREE.Box3().setFromObject(scene.getObjectByName('Notebook')!).expandByVector(new THREE.Vector3(0.01, 0.02, 0.01)),
+      resume: new THREE.Box3().setFromObject(scene.getObjectByName('Resume')!).expandByVector(new THREE.Vector3(0, 0.01, 0)),
     };
     rig.ready = true;
   }, [scene, lib]);
@@ -138,7 +139,8 @@ export default function Scene({ q }: { q: QualitySettings }) {
       if (device === 'laptop') void openLaptop();
       else if (device === 'phone') void openPhone();
       else if (device === 'cup') void sipCoffee();
-      else void openNotebook();
+      else if (device === 'resume') void openNotebook('resume');
+      else void openNotebook('notebook');
     },
   });
 
@@ -156,7 +158,7 @@ export default function Scene({ q }: { q: QualitySettings }) {
           resolution={q.contactShadowRes} color="#2a1206" frames={Infinity}
         />
       )}
-      {boxes && interactive && (['laptop', 'phone', 'cup', 'notebook'] as const).map((d) => {
+      {boxes && interactive && (['laptop', 'phone', 'cup', 'notebook', 'resume'] as const).map((d) => {
         const b = boxes[d];
         const c = b.getCenter(new THREE.Vector3());
         const s = b.getSize(new THREE.Vector3());

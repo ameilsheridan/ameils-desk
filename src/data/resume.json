@@ -1,0 +1,105 @@
+{
+  "name": "Ameil Sheridan",
+  "title": "Product Designer",
+  "location": "Kuala Lumpur, Malaysia",
+  "summary": "Product designer with 4+ years designing enterprise SaaS, AI and healthcare products. I research the messy middle of complex workflows, turn it into clear flows and reusable systems, and work closely with engineers to ship it.",
+  "lookingFor": {
+    "roles": [
+      "Senior Product Designer",
+      "Design Lead"
+    ],
+    "setup": "Open to remote, hybrid and international teams",
+    "strengths": "Enterprise workflows, AI-assisted UX, design systems, healthcare and regulated products"
+  },
+  "experience": [
+    {
+      "org": "Vistra",
+      "role": "UI/UX Designer",
+      "when": "Jul 2025 to now",
+      "where": "Kuala Lumpur, working with teams across Asia Pacific and Europe",
+      "about": "Global Expansion Platform (GEP), an enterprise product that helps companies manage legal entities across many countries.",
+      "highlights": [
+        "Designing AI-assisted workflows for GEP, including Smart Fill, AI suggestion cards with confidence scores and provenance badges that separate AI-filled from manually entered values.",
+        "Redesigned Service Tracker and the Appoint Director service request: a three-step flow, jurisdiction-aware fields for BVI, Singapore and Hong Kong, and milestone tracking for multi-entity requests.",
+        "Building GeniOS, the design library for GEP's AI workflows, combining existing GEP components with new AI-native patterns such as the Geni assistant panel.",
+        "Maintaining components and guidelines: tables, modals, toasts, navigation, upload and download, and accessibility fixes."
+      ]
+    },
+    {
+      "org": "CMG Group Berhad",
+      "role": "Head Designer, PhIS 3.0",
+      "when": "Jan 2024 to Jul 2025",
+      "where": "Kuala Lumpur",
+      "about": "PhIS 3.0, the pharmacy information system redesign built for the NPRA.",
+      "highlights": [
+        "Led design for the PhIS 3.0 redesign, from research and flows to high-fidelity screens.",
+        "Designed visit management, patient admission and role-based homepages for clerks and nurses."
+      ]
+    },
+    {
+      "org": "Hummingsoft Sdn Bhd",
+      "role": "GIS Analyst and UI/UX Designer",
+      "when": "Apr 2022 to Jan 2024",
+      "where": "Kuala Lumpur",
+      "about": "Map-based monitoring systems and dashboards for infrastructure and government clients.",
+      "highlights": [
+        "Designed map-based dashboards and internal tools, turning spatial and project data into everyday interfaces.",
+        "Ran GIS analysis alongside interface design, so the data and the UI were shaped together."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "title": "Bachelor of Arts (Geography)",
+      "org": "University of Malaya",
+      "when": "2017 to 2022",
+      "note": "Spatial analysis and GIS: where my habit of mapping whole systems before the details began."
+    }
+  ],
+  "certificates": [
+    {
+      "title": "Google UX Design Professional Certificate",
+      "org": "Google",
+      "when": "2023",
+      "note": "Research, wireframing, prototyping and usability testing."
+    },
+    {
+      "title": "HTML and CSS",
+      "org": "Meta",
+      "when": "2025",
+      "note": "Front-end foundations for designing closer to code."
+    }
+  ],
+  "skills": {
+    "Design": [
+      "Product and UX design",
+      "Interaction design",
+      "Design systems",
+      "Prototyping",
+      "AI-assisted UX patterns"
+    ],
+    "Research": [
+      "User interviews",
+      "Usability testing",
+      "Journey mapping",
+      "Competitive analysis"
+    ],
+    "Tools": [
+      "Figma",
+      "Framer",
+      "FlutterFlow",
+      "Penpot",
+      "Photoshop",
+      "After Effects"
+    ],
+    "Build": [
+      "HTML, CSS and JavaScript",
+      "Working with React teams",
+      "ArcGIS and QGIS"
+    ]
+  },
+  "languages": [
+    "English",
+    "Bahasa Melayu"
+  ]
+}
