@@ -36,6 +36,11 @@
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "preview",
+    "scripts",
+    "tests-e2e",
+    "vite.preview.config.ts",
+    "dist-preview"
   ]
 }
