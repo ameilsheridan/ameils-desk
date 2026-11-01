@@ -165,9 +165,9 @@ export default function HandController({ textures }: { textures: TexSet }) {
         const pos = GRIP.cup.pos.clone().applyMatrix4(cup.matrixWorld);
         const cq = new THREE.Quaternion().setFromRotationMatrix(t.m.extractRotation(cup.matrixWorld)).multiply(GRIP.cup.quat);
         if (phase === 'reach') return { state: 'reaching', pose: 'open', pos: pos.add(new THREE.Vector3(0.02, 0.03, 0.03)), quat: cq, smooth: 0.13 };
-        if (phase === 'grip') return { state: 'grabbing', pose: 'grip', pos, quat: cq, smooth: 0.06 };
+        if (phase === 'grip') return { state: 'grabbing', pose: 'mug', pos, quat: cq, smooth: 0.06 };
         if (phase === 'release') return { state: 'releasing', pose: 'open', pos: pos.add(new THREE.Vector3(0.03, 0.04, 0.04)), quat: cq, smooth: 0.12 };
-        if (phase === 'lift' || phase === 'hold' || phase === 'lower') return { state: 'holding', pose: 'hold', pos, quat: cq, smooth: 0, attached: true };
+        if (phase === 'lift' || phase === 'hold' || phase === 'lower') return { state: 'holding', pose: 'mug', pos, quat: cq, smooth: 0, attached: true };
       }
       // laptop: the index finger hovers over the trackpad (and taps it when opening)
       const lap = rig.laptop;

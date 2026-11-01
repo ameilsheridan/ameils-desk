@@ -219,6 +219,8 @@ export const POSES = {
   // holding a phone from behind: palm and fingers stay behind the device, fingertips hug its left edge
   // (never over the screen) and the thumb rests up the right edge
   hold: P([0.2, 0.8, 0.5], [0.18, 0.8, 0.5], [0.2, 0.78, 0.5], [0.35, 0.8, 0.55], [0.45, 0.7, 0.5], [-0.3, 0.15, 0.95], 0.0, 0.05),
+  // index hooked through a mug handle, other fingers tucked under it, thumb resting on top
+  mug: P([0.9, 1.2, 0.6], [1.3, 1.4, 0.8], [1.4, 1.4, 0.8], [1.4, 1.3, 0.8], [0.35, 0.3, 0.2], [-0.9, -0.3, 0.6], 0.0, 0.05),
   open: P([0.08, 0.1, 0.06], [0.1, 0.12, 0.06], [0.12, 0.14, 0.08], [0.16, 0.16, 0.1], [0.05, 0.05, 0.05], [-0.29, -0.19, 1.12], 0.85, -0.05),
 } satisfies Record<string, Pose>;
 

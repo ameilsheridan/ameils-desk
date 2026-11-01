@@ -6,7 +6,7 @@ export const GRIP = {
   hold: frame(new THREE.Vector3(0.124, -0.06, 0.07), new THREE.Vector3(-1, 0, -0.12), new THREE.Vector3(0.04, -1, 0)),
   // cup-local (+X toward the handle, +Y up, +Z toward the viewer): fingers through the handle,
   // back of the hand facing out, thumb resting on top of the handle
-  cup: frame(new THREE.Vector3(0.062, 0.006, 0.104), new THREE.Vector3(0, 0, -1), new THREE.Vector3(1, 0.12, 0)),
+  cup: frame(new THREE.Vector3(0.075, 0.0, 0.095), new THREE.Vector3(-0.25, 0.15, -1), new THREE.Vector3(1, 0.4, 0)),
 };
 
 function frame(pos: THREE.Vector3, finger: THREE.Vector3, dorsal: THREE.Vector3) {

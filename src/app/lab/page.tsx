@@ -8,7 +8,7 @@ export default async function Lab({ searchParams }: { searchParams: Promise<Reco
   return (
     <LabClient
       pose={(sp.pose ?? 'hold') as PoseName}
-      grip={sp.grip === 'desk' ? 'desk' : 'hold'}
+      grip={sp.grip === 'desk' ? 'desk' : sp.grip === 'cup' ? 'cup' : 'hold'}
       left={(sp.left as PoseName) ?? null}
       override={sp.o ?? null}
     />

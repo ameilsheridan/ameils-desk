@@ -9,7 +9,7 @@ import { GRIP, basisQuat } from '@/experience/hands/grips';
 
 /** Development lab for tuning hand poses against the phone (not linked from the site). */
 type O = { pose?: Partial<Pose>; pos?: [number, number, number]; finger?: [number, number, number]; dorsal?: [number, number, number] };
-function Rig({ pose, grip, left, o }: { pose: PoseName; grip: 'hold' | 'desk'; left: PoseName | null; o: O | null }) {
+function Rig({ pose, grip, left, o }: { pose: PoseName; grip: 'hold' | 'desk' | 'cup'; left: PoseName | null; o: O | null }) {
   const objs = useMemo(() => {
     const mats = {
       skin: new THREE.MeshPhysicalMaterial({ color: '#f0b993', roughness: 0.62, sheen: 0.7, sheenColor: new THREE.Color('#ff9f7f') }),
@@ -22,6 +22,18 @@ function Rig({ pose, grip, left, o }: { pose: PoseName; grip: 'hold' | 'desk'; l
     screen.rotation.x = -Math.PI / 2;
     screen.position.y = 0.0042;
     phone.add(body, screen);
+    if (grip === 'cup') {
+      phone.clear();
+      const ceramic = new THREE.MeshStandardMaterial({ color: '#f1ebe2', roughness: 0.4 });
+      const body = new THREE.Mesh(new THREE.CylinderGeometry(0.046, 0.03, 0.056, 40, 1, true), ceramic);
+      body.position.y = 0.034;
+      const coffee = new THREE.Mesh(new THREE.CircleGeometry(0.043, 40), new THREE.MeshStandardMaterial({ color: '#9b6a45' }));
+      coffee.rotation.x = -Math.PI / 2; coffee.position.y = 0.052;
+      const handle = new THREE.Mesh(new THREE.TorusGeometry(0.014, 0.003, 10, 24, Math.PI), ceramic);
+      handle.position.set(0.05, 0.035, 0); handle.rotation.z = -Math.PI / 2;
+      phone.add(body, coffee, handle);
+      phone.quaternion.setFromAxisAngle(new THREE.Vector3(0, 1, 0), -0.65);
+    }
     if (grip === 'hold') {
       // upright, screen toward the camera (+Z), top up
       phone.quaternion.setFromRotationMatrix(new THREE.Matrix4().makeBasis(
@@ -76,7 +88,7 @@ function View({ position, children }: { position: [number, number, number]; chil
   );
 }
 
-export default function HandLab({ pose, grip, left, override }: { pose: PoseName; grip: 'hold' | 'desk'; left: PoseName | null; override: string | null }) {
+export default function HandLab({ pose, grip, left, override }: { pose: PoseName; grip: 'hold' | 'desk' | 'cup'; left: PoseName | null; override: string | null }) {
   const o: O | null = override ? JSON.parse(override) : null;
   const rig = <Rig pose={pose} grip={grip} left={left} o={o} />;
   return (
