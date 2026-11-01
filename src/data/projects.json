@@ -1,0 +1,808 @@
+[
+  {
+    "slug": "phis",
+    "name": "PhIS 3.0",
+    "category": "Healthcare",
+    "client": "CMG Group Berhad · NPRA",
+    "year": "2024–25",
+    "role": "Head Designer",
+    "summary": "Leading the redesign of a national pharmacy information system.",
+    "palette": [
+      "#1f3b3a",
+      "#9fd3c7",
+      "#f5f2ee",
+      "#e7a0a4"
+    ],
+    "brand": "#1f7a6e",
+    "nda": false
+  },
+  {
+    "slug": "geni",
+    "name": "Geni 2.0",
+    "category": "AI",
+    "client": "Vistra · Global Expansion Platform",
+    "year": "2025–26",
+    "role": "UI/UX Designer",
+    "summary": "AI-assisted workflows that help teams manage entities across many countries.",
+    "palette": [
+      "#2b2140",
+      "#e7a0a4",
+      "#f5f2ee",
+      "#7d6aa8"
+    ],
+    "brand": "#6b4ee6",
+    "nda": true
+  },
+  {
+    "slug": "appoint-director",
+    "name": "Appoint Director",
+    "category": "Enterprise",
+    "client": "Vistra · Global Expansion Platform",
+    "year": "2025–26",
+    "role": "UI/UX Designer",
+    "summary": "Redesigning a multi-step director appointment flow for corporate filings.",
+    "palette": [
+      "#18365d",
+      "#f4b6a1",
+      "#f5f2ee",
+      "#365580"
+    ],
+    "brand": "#2456d6",
+    "nda": true
+  },
+  {
+    "slug": "service-tracker",
+    "name": "Service Tracker 2.0",
+    "category": "Enterprise",
+    "client": "Vistra · Global Expansion Platform",
+    "year": "2025–26",
+    "role": "UI/UX Designer",
+    "summary": "Making service requests legible: status, ownership and next steps at a glance.",
+    "palette": [
+      "#06142d",
+      "#e0a94f",
+      "#f5f2ee",
+      "#365580"
+    ],
+    "brand": "#c2410c",
+    "nda": true
+  },
+  {
+    "slug": "medup",
+    "name": "MedUP",
+    "category": "Healthcare",
+    "client": "Self-initiated concept",
+    "year": "—",
+    "role": "UX Researcher & UI Designer",
+    "summary": "A smart booking and live-queue app that helps patients spend less time waiting for care.",
+    "palette": [
+      "#0b4f52",
+      "#2cd6d2",
+      "#f2fbfb",
+      "#03a0aa"
+    ],
+    "brand": "#0a8f98",
+    "nda": false,
+    "caseStudy": {
+      "heroImage": {
+        "src": "medup-phone-home.webp",
+        "alt": "MedUP home screen with booking, facility search and emergency shortcuts"
+      },
+      "statement": {
+        "lead": "MedUP brings booking, live queues and QR check-in into one calm app,",
+        "rest": "so patients spend less of their day waiting for care.",
+        "image": {
+          "src": "medup-phone-splash.webp",
+          "alt": "MedUP splash screen"
+        }
+      },
+      "prototype": {
+        "label": "Open the Figma prototype",
+        "href": "https://www.figma.com/proto/QiQ9qUUlMnH2ueRC67YR73/RESUME?node-id=751-24653&p=f&viewport=369%2C175%2C0.05&t=7lGrUp7ILlZs8dxw-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=751%3A24616&page-id=751%3A24515"
+      },
+      "challenge": [
+        "Getting care often starts with a wait before the wait. Patients wake early to beat the crowds, sit in traffic, hunt for parking, then arrive at a packed facility only to queue twice: once for treatment and again for their medicine.",
+        "Underneath it sits an outdated appointment and queue process with no real-time tracking, little guidance on what happens next, and no easy way to find a nearby facility. Medical staff feel it too, absorbing the frustration and planning around unpredictable crowds."
+      ],
+      "research": {
+        "label": "UX research",
+        "aside": "3 apps benchmarked",
+        "headline": "Patients often queue twice: once for treatment, then again for their medicine.",
+        "problem": "Getting care often means waking early, sitting in traffic and waiting at a packed facility, with no live view of the queue and no easy way to find a nearby clinic. Existing apps crashed, lost accounts or hid key features.",
+        "solution": "A five-step booking flow that starts with the services you need, shows only real slots at nearby facilities, tracks your place in the queue live and checks you in with a QR code. Anyone can book for a parent, partner or child.",
+        "image": {
+          "src": "medup-phone-slots.webp",
+          "alt": "Slot picker showing available appointment times at Ara Damansara Medical Centre"
+        }
+      },
+      "journeyMap": {
+        "title": "The patient journey today",
+        "intro": "A typical visit, from deciding where to go to remembering the next appointment. The grey line is how it feels now; the teal line is the experience MedUP is designed for.",
+        "note": "Built from the survey and benchmark findings. Thoughts are paraphrased themes, not direct quotes.",
+        "stages": [
+          {
+            "stage": "Decide where to go",
+            "doing": "Searches online or asks family which clinic is open",
+            "thinking": "Which clinic can see me today, and how busy is it?",
+            "pain": "No single place shows nearby facilities, their services and how crowded they are",
+            "opportunity": "Nearby facilities filtered by service, with hours and crowd level",
+            "before": 2,
+            "after": 4
+          },
+          {
+            "stage": "Leave home",
+            "doing": "Wakes up early to beat the crowd",
+            "thinking": "If I'm late, I'll be waiting for hours.",
+            "pain": "Guessing when to leave; time is lost before care even starts",
+            "opportunity": "A live queue number and an arrival estimate from home",
+            "before": 2,
+            "after": 4
+          },
+          {
+            "stage": "Travel and park",
+            "doing": "Sits in traffic, then hunts for parking",
+            "thinking": "I'm already tired and I haven't been seen.",
+            "pain": "Traffic and parking add stress to an unpredictable wait",
+            "opportunity": "Leave when your number is close, with directions to the door",
+            "before": 1.5,
+            "after": 3.5
+          },
+          {
+            "stage": "Register and wait",
+            "doing": "Queues at the counter, then waits in a packed hall",
+            "thinking": "How many people are still ahead of me?",
+            "pain": "No real-time tracking and little guidance on what happens next",
+            "opportunity": "QR check-in and a live 'now serving' view",
+            "before": 1,
+            "after": 4
+          },
+          {
+            "stage": "Consultation",
+            "doing": "Sees the doctor and explains their history again",
+            "thinking": "Finally. Did I remember all my medicines?",
+            "pain": "History and past visits live on paper or in memory",
+            "opportunity": "A medical profile and past visits ready to show",
+            "before": 3.5,
+            "after": 4.5
+          },
+          {
+            "stage": "Pharmacy",
+            "doing": "Queues a second time for medicine",
+            "thinking": "Another queue?",
+            "pain": "A second wait after treatment",
+            "opportunity": "The same QR code carries through to the pharmacy visit",
+            "before": 1.5,
+            "after": 3.5
+          },
+          {
+            "stage": "Follow-up",
+            "doing": "Keeps a paper slip for the next appointment",
+            "thinking": "When is my next visit again?",
+            "pain": "Reminders and prescriptions are easy to lose",
+            "opportunity": "Visit reminders and a medication record in the app",
+            "before": 2.5,
+            "after": 4.5
+          }
+        ]
+      },
+      "approach": [
+        {
+          "title": "Research",
+          "body": "Surveyed people who use existing health apps and benchmarked MySejahtera, Healthify and Doctor Anywhere. Users reported crashes, lost accounts, poor usability and unclear navigation. MySejahtera was strong on queue tracking but weak on usability, while the others had better interfaces but narrower features and accessibility. That gap became MedUP's opportunity.",
+          "tags": [
+            "Survey",
+            "Competitor benchmark",
+            "Pain points"
+          ]
+        },
+        {
+          "title": "Map the journey",
+          "body": "Built a persona, mapped needs, goals and pain points, and charted the pre-improvement journey of booking an appointment to see where time and confidence were lost.",
+          "tags": [
+            "Persona",
+            "User journey",
+            "Needs and goals"
+          ]
+        },
+        {
+          "title": "Shape the flow",
+          "body": "Kept booking to five steps including confirmation. Users pick the services they need first, which narrows the facility list; nearby facilities come from their location; only genuinely available slots are shown; and anyone can book for a parent, partner or child.",
+          "tags": [
+            "Information architecture",
+            "Five-step booking",
+            "Family booking"
+          ]
+        },
+        {
+          "title": "Design and prototype",
+          "body": "Moved from paper sketches to high-fidelity screens for the splash, homepage, appointment and services, facility and time slot, and confirmation with QR code, then linked them into a clickable Figma prototype.",
+          "tags": [
+            "Paper sketches",
+            "High-fidelity UI",
+            "Clickable prototype"
+          ]
+        }
+      ],
+      "journey": {
+        "title": "Mapping the patient journey from sign-in to check-in",
+        "body": [
+          "Before designing screens, I charted how people book care today and where time and confidence were lost: finding the right facility, guessing when to leave home and waiting without knowing their place in line.",
+          "That map became the app's structure. Each group below is a tab or flow in the prototype, so a patient is never more than a few taps from booking, their queue number or their records."
+        ],
+        "goals": [
+          "Fewer steps to book",
+          "See the queue before you leave",
+          "Book for the whole family"
+        ],
+        "map": [
+          {
+            "group": "Get started",
+            "items": [
+              "Onboarding",
+              "Phone sign-in",
+              "One-time code"
+            ]
+          },
+          {
+            "group": "Home",
+            "items": [
+              "Book an appointment",
+              "Locate a facility",
+              "Request an emergency"
+            ]
+          },
+          {
+            "group": "Booking",
+            "items": [
+              "Select services",
+              "Select facility",
+              "Pick a slot",
+              "Confirm with QR"
+            ]
+          },
+          {
+            "group": "Records",
+            "items": [
+              "Appointments",
+              "Medical profile",
+              "Medication record"
+            ]
+          }
+        ],
+        "logo": {
+          "src": "medup-logo.webp",
+          "alt": "MedUP logo"
+        }
+      },
+      "walkthrough": [
+        {
+          "title": "Onboarding",
+          "subtitle": "Four screens, four promises",
+          "body": "Find a facility, book in a few taps, follow the queue live and check in with one QR code. Each screen explains one job with one illustration and a single Next button.",
+          "why": "People in the survey abandoned health apps that felt confusing on first use. Naming the four jobs up front sets expectations before the app asks for anything personal.",
+          "images": [
+            {
+              "src": "medup-onboarding.webp",
+              "alt": "Four onboarding screens: find facilities, book appointments, real-time queue updates and QR check-in"
+            }
+          ],
+          "wide": true
+        },
+        {
+          "title": "Sign in",
+          "subtitle": "A phone number and a one-time code",
+          "body": "Enter a mobile number, type the code that arrives by SMS, and a clear verified state confirms the account before the app opens.",
+          "why": "Lost accounts and forgotten passwords came up again and again. A phone number is something every patient already has, and the same number can carry appointment reminders.",
+          "images": [
+            {
+              "src": "medup-phone-number.webp",
+              "alt": "Phone number login screen"
+            },
+            {
+              "src": "medup-phone-otp.webp",
+              "alt": "One-time code entry with a number pad"
+            }
+          ]
+        },
+        {
+          "title": "Home",
+          "subtitle": "Three jobs, one tap away",
+          "body": "Book an appointment, locate a facility and request an emergency sit at the top. Your next appointment and the list of services follow underneath.",
+          "why": "Most visits start with one of three intents: book, find or get urgent help. Putting them first, with the upcoming visit always visible, means returning patients never dig through menus.",
+          "images": [
+            {
+              "src": "medup-phone-home.webp",
+              "alt": "MedUP home screen with three primary actions, the next appointment and services"
+            }
+          ]
+        },
+        {
+          "title": "Booking",
+          "subtitle": "Service first, then place, then time",
+          "body": "Choose who the visit is for and the service you need. The facility list narrows to places that offer it, and only open slots are shown. A progress bar tracks the four steps to confirmation.",
+          "why": "Starting with the service removes dead ends: you never pick a clinic and then find it cannot help. Showing only real slots stops people booking times that do not exist.",
+          "images": [
+            {
+              "src": "medup-phone-services.webp",
+              "alt": "Select services step with inpatient, outpatient and emergency options"
+            },
+            {
+              "src": "medup-phone-slots.webp",
+              "alt": "Select slot step with available times by day"
+            }
+          ]
+        },
+        {
+          "title": "Choosing a facility",
+          "subtitle": "Everything you need on one card",
+          "body": "Each facility card shows whether it is government or private, the address and distance, today's opening hours and how busy it is right now.",
+          "why": "Deciding where to go was the first pain point in the journey. The crowd indicator lets patients trade a slightly longer drive for a much shorter wait.",
+          "images": [
+            {
+              "src": "medup-phone-facility.webp",
+              "alt": "Select facility step listing nearby clinics"
+            },
+            {
+              "src": "medup-ui-facility.webp",
+              "alt": "Facility card showing type, address, distance, hours and a heavy crowd indicator"
+            }
+          ],
+          "detail": true
+        },
+        {
+          "title": "Records",
+          "subtitle": "Your history, ready to show",
+          "body": "A medical profile with height, weight, BMI and blood type, and prescriptions with dose, route and duration, grouped under the visit they came from.",
+          "why": "Patients repeat their history at every visit and lose track of medication. Keeping each record with its visit makes it easy to show a doctor or pharmacist in seconds.",
+          "images": [
+            {
+              "src": "medup-phone-history.webp",
+              "alt": "Medical profile with body measurements and record categories"
+            },
+            {
+              "src": "medup-phone-records.webp",
+              "alt": "Medication record grouped by facility visit"
+            }
+          ]
+        }
+      ],
+      "feature": {
+        "title": "Live queue and QR check-in, so you arrive when it is your turn",
+        "body": [
+          "After booking, MedUP shows your queue number and the numbers being served right now, with an estimated arrival time from home.",
+          "At the facility, a single QR code handles registration, check-in and pharmacy visits."
+        ],
+        "image": {
+          "src": "medup-phone-qr.webp",
+          "alt": "Booking confirmation with current queue number and a QR code to scan on arrival"
+        }
+      },
+      "style": {
+        "intro": "A clean clinical base of white and soft grey, with one confident teal for anything you can act on. Rounded cards and large touch targets keep every step easy to tap.",
+        "colors": [
+          {
+            "name": "MedUP teal",
+            "hex": "#00AFB9"
+          },
+          {
+            "name": "Alert coral",
+            "hex": "#F66B6B"
+          },
+          {
+            "name": "Primary black",
+            "hex": "#171717"
+          },
+          {
+            "name": "Secondary text",
+            "hex": "#5E6B81"
+          },
+          {
+            "name": "Mint surface",
+            "hex": "#E6F8F8"
+          },
+          {
+            "name": "White",
+            "hex": "#FFFFFF"
+          }
+        ],
+        "logo": {
+          "src": "medup-logo.webp",
+          "alt": "MedUP logo"
+        },
+        "logoColor": {
+          "src": "medup-logo-color.webp",
+          "alt": "MedUP logo in teal and coral"
+        }
+      },
+      "components": {
+        "intro": "A small kit built for a busy clinic: large tap targets, one teal for anything you can act on, and coral kept for alerts such as crowd levels.",
+        "items": [
+          {
+            "src": "medup-ui-buttons.webp",
+            "alt": "Primary and secondary booking buttons",
+            "label": "Buttons, primary and secondary"
+          },
+          {
+            "src": "medup-ui-menu.webp",
+            "alt": "Book an appointment menu card in default and pressed states",
+            "label": "Menu card, default and pressed"
+          },
+          {
+            "src": "medup-ui-progress.webp",
+            "alt": "Four-step booking progress bar",
+            "label": "Booking progress, four steps"
+          },
+          {
+            "src": "medup-ui-nav.webp",
+            "alt": "Bottom tab bar in idle and active states",
+            "label": "Tab bar, idle and active"
+          },
+          {
+            "src": "medup-ui-fab.webp",
+            "alt": "Floating add and scan buttons",
+            "label": "Floating actions: add and scan"
+          },
+          {
+            "src": "medup-ui-icons.webp",
+            "alt": "Service icons for ophthalmology, dental, pulmonology and cardiology",
+            "label": "Service icons"
+          }
+        ]
+      },
+      "outcome": [
+        "The first phase delivers a clickable prototype covering booking, live queue traffic for each facility, an estimated arrival time from home, medication history and past visits, upcoming-visit reminders, quick emergency contact and QR check-in.",
+        "Next steps are connecting to facilities' existing queue systems and expanding the feature set beyond this first phase."
+      ],
+      "why": {
+        "title": "Why it matters",
+        "lead": "Care should start when you arrive, not hours before.",
+        "body": "MedUP's end goal is to give patients back the time they lose to uncertainty, and to give medical staff a calmer, more predictable day.",
+        "goals": [
+          {
+            "who": "Patients",
+            "goal": "Spend less of the day waiting: book in five steps, leave home when your number is close and check in with one code.",
+            "measure": "Time to a confirmed booking; time spent waiting at the facility"
+          },
+          {
+            "who": "Families",
+            "goal": "Book and track visits for parents, partners and children from one account.",
+            "measure": "Bookings made for someone else"
+          },
+          {
+            "who": "Medical staff",
+            "goal": "Fewer frustrated patients and steadier crowds, as arrivals spread across the day.",
+            "measure": "Peak waiting-area headcount; booked visits versus walk-ins"
+          },
+          {
+            "who": "Facilities",
+            "goal": "Fewer no-shows and less paper at the counter.",
+            "measure": "No-show rate; share of check-ins by QR"
+          }
+        ],
+        "note": "These are the measures the next phase would track. The concept has not been tested with live patients yet."
+      },
+      "impact": [
+        {
+          "value": "5",
+          "label": "steps from opening the app to a confirmed booking"
+        },
+        {
+          "value": "3",
+          "label": "competing apps benchmarked"
+        }
+      ],
+      "stack": {
+        "title": "Making it real",
+        "intro": "MedUP is a concept today. These are the integrations I would propose to build it, chosen to fit how Malaysian healthcare is already going digital.",
+        "items": [
+          {
+            "tag": "Identity",
+            "name": "MyDigital ID",
+            "use": "Verified sign-in with Malaysia's national digital identity, alongside phone OTP, so records link safely to the right person."
+          },
+          {
+            "tag": "Health records",
+            "name": "HL7 FHIR R4 (MY Core)",
+            "use": "Read appointments, records and prescriptions using the standard the Ministry of Health chose for its national Health Information Exchange."
+          },
+          {
+            "tag": "Live queue",
+            "name": "Facility queue systems",
+            "use": "Connect to each facility's queue and appointment system, such as HIS@KKM in public hospitals, for live 'now serving' numbers and real slots."
+          },
+          {
+            "tag": "Location",
+            "name": "Google Maps Platform",
+            "use": "Places for nearby facilities and Routes for travel time, so the app can tell you when to leave."
+          },
+          {
+            "tag": "Reminders",
+            "name": "Push and WhatsApp",
+            "use": "Firebase Cloud Messaging for push, and the WhatsApp Business Platform for reminders patients actually read."
+          },
+          {
+            "tag": "Payments",
+            "name": "DuitNow QR and FPX",
+            "use": "Pay consultation or pharmacy fees in the app where a facility charges them."
+          },
+          {
+            "tag": "Platform",
+            "name": "React Native, Node.js, PostgreSQL",
+            "use": "One app for iOS and Android, with patient data hosted in Malaysia and handled under the Personal Data Protection Act 2010."
+          }
+        ]
+      },
+      "tools": [
+        "Figma",
+        "Paper sketching"
+      ],
+      "links": [
+        {
+          "label": "Figma prototype",
+          "href": "https://www.figma.com/proto/QiQ9qUUlMnH2ueRC67YR73/RESUME?node-id=751-24653&p=f&viewport=369%2C175%2C0.05&t=7lGrUp7ILlZs8dxw-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=751%3A24616&page-id=751%3A24515"
+        }
+      ]
+    },
+    "coverImage": "medup-cover.webp"
+  },
+  {
+    "slug": "mrts-dashboard",
+    "name": "MRTS Analytics Dashboard",
+    "category": "Enterprise",
+    "client": "Rail infrastructure · Johor–Singapore RTS",
+    "year": "—",
+    "role": "UI/UX Designer",
+    "summary": "A construction progress dashboard that turns on-site data into clear, real-time decisions.",
+    "palette": [
+      "#1d2b3a",
+      "#e0a94f",
+      "#f5f2ee",
+      "#4f6f8f"
+    ],
+    "brand": "#2f4fb5",
+    "nda": false,
+    "caseStudy": {
+      "challenge": [
+        "Building a rail line generates a constant stream of complex progress data from the ground. Project managers needed to see at a glance where things stood, spot risks early and act on delays, without digging through raw reports."
+      ],
+      "approach": [
+        {
+          "title": "Landing overview",
+          "body": "Colour-coded indicators flag lines approaching or past their deadlines, a built-in countdown keeps upcoming dates visible, and anything overdue turns red."
+        },
+        {
+          "title": "Drill-down by package",
+          "body": "Selecting a line opens tabbed views for financials, resources, overall progress, safety, documents and storage, so each audience finds its own detail without clutter."
+        },
+        {
+          "title": "Ground-level evidence",
+          "body": "A media gallery brings in on-site photos and updates captured through SitePro, connecting the numbers to what is actually happening on site."
+        },
+        {
+          "title": "Safety and timeline",
+          "body": "Safety views track accident rates, near misses, site risk levels and compliance. Pillar progress uses four status colours (on track, completed, in progress, at risk) to keep cognitive load low."
+        }
+      ],
+      "impact": [
+        {
+          "value": "6",
+          "label": "focused views for every work package"
+        },
+        {
+          "value": "4",
+          "label": "status colours for pillar progress"
+        }
+      ],
+      "outcome": [
+        "A dashboard that helps managers understand progress quickly, stay on schedule and make faster, better-informed decisions. The prototype is available on request."
+      ],
+      "tools": [
+        "Figma"
+      ]
+    }
+  },
+  {
+    "slug": "sitepro",
+    "name": "SitePro",
+    "category": "Enterprise",
+    "client": "Rail infrastructure · site operations",
+    "year": "—",
+    "role": "UI/UX Designer",
+    "summary": "A mobile-first site app for capturing daily progress right where the work happens.",
+    "palette": [
+      "#26323a",
+      "#f4b6a1",
+      "#f5f2ee",
+      "#5f7a86"
+    ],
+    "brand": "#b4535b",
+    "nda": false,
+    "caseStudy": {
+      "challenge": [
+        "Ground workers needed a quick way to report progress from site. Reports had to be accurate, timely and structured, because they feed the central dashboard that project managers and senior management rely on."
+      ],
+      "approach": [
+        {
+          "title": "Sign-in and sites",
+          "body": "A clean sign-in leads to a landing page listing every active project, so workers can switch between sites in one tap."
+        },
+        {
+          "title": "Calendar-based reports",
+          "body": "Daily reports live on a calendar, making past days easy to revisit, with a single plus button to add or update today's entry."
+        },
+        {
+          "title": "Detail without friction",
+          "body": "Each report captures resource usage, progress metrics, notes and photos through quick, multi-purpose inputs, keeping data entry fast on a busy site."
+        }
+      ],
+      "outcome": [
+        "SitePro bridges on-site activity and high-level monitoring: everything submitted flows straight into the MRTS analytics dashboard. The prototype is available on request."
+      ],
+      "tools": [
+        "Figma"
+      ]
+    }
+  },
+  {
+    "slug": "savvyspend",
+    "name": "SavvySpend",
+    "category": "Personal",
+    "client": "Side project",
+    "year": "—",
+    "role": "UI/UX Designer",
+    "summary": "A calendar-first budgeting app for planning, tracking and paying monthly commitments.",
+    "palette": [
+      "#2c2416",
+      "#e7a0a4",
+      "#f5f2ee",
+      "#b38b59"
+    ],
+    "brand": "#15803d",
+    "nda": false,
+    "caseStudy": {
+      "challenge": [
+        "Subscriptions, car loans, mortgages and savings goals all fall due on different days, which makes a month's commitments hard to see in one place. The goal was a bird's-eye view of what is due and what is paid, simple enough for newcomers to finance apps yet useful for tech-savvy users."
+      ],
+      "approach": [
+        {
+          "title": "The calendar as the hub",
+          "body": "Every commitment sits on a full-screen calendar, which also makes month-to-month comparison easy."
+        },
+        {
+          "title": "Lightweight adding",
+          "body": "New items open in a drawer sheet rather than a full page: name, due date, amount, who to pay, reminder and payment method."
+        },
+        {
+          "title": "Smart details",
+          "body": "Tapping a date shows one item's details directly or a list when several are due, and each item switches between paid and unpaid in one tap."
+        },
+        {
+          "title": "A calm palette",
+          "body": "A greenish-yellow 'Parchment' primary colour suggests growth, stability and prosperity, and onboarding stays short."
+        }
+      ],
+      "outcome": [
+        "A full-flow, high-fidelity Figma prototype covering splash, onboarding, the home overview (this month, an automatic expense breakdown, upcoming payments and paid transactions), adding items and viewing them.",
+        "Future ideas include categories, recurring payments and custom notes."
+      ],
+      "tools": [
+        "Figma"
+      ]
+    }
+  },
+  {
+    "slug": "e-leave",
+    "name": "E-Leave",
+    "category": "Personal",
+    "client": "Self-initiated",
+    "year": "—",
+    "role": "UI/UX Designer",
+    "summary": "A mobile leave app that replaces paper forms and clunky web portals with a quick request flow.",
+    "palette": [
+      "#2d2a44",
+      "#9fd3c7",
+      "#f5f2ee",
+      "#6b6a9a"
+    ],
+    "brand": "#4f46e5",
+    "nda": false,
+    "caseStudy": {
+      "challenge": [
+        "Applying for leave through a paper form or a website-only system is a hassle for employees and HR alike."
+      ],
+      "approach": [
+        {
+          "title": "Sketch",
+          "body": "Started on paper to lay the foundations of the app quickly."
+        },
+        {
+          "title": "Low fidelity",
+          "body": "Rebuilt the sketches in Figma to understand the flows and the experience end to end."
+        },
+        {
+          "title": "High fidelity",
+          "body": "Designed a polished prototype, including ideas to encourage early sign-up by highlighting member benefits."
+        }
+      ],
+      "outcome": [
+        "A low- and high-fidelity prototype. The project is in an exploratory phase, with no-code tools such as FlutterFlow or Glide under consideration for a build."
+      ],
+      "tools": [
+        "Figma",
+        "Paper sketching"
+      ]
+    }
+  },
+  {
+    "slug": "jps-gis",
+    "name": "GIS with JPS Selangor",
+    "category": "GIS",
+    "client": "Department of Irrigation and Drainage (JPS) Selangor",
+    "year": "—",
+    "role": "GIS Assistant Analyst (internship)",
+    "summary": "Mapping catchment terrain and processing drone surveys alongside engineers at JPS Selangor.",
+    "palette": [
+      "#163028",
+      "#9fb89a",
+      "#f5f2ee",
+      "#4f7a5f"
+    ],
+    "brand": "#0369a1",
+    "nda": false,
+    "caseStudy": {
+      "challenge": [
+        "Engineers and quantity surveyors planning construction and consultancy work needed clear terrain and river-flow pictures of their project areas. Under the guidance of the Deputy Director, I applied GIS to JPS projects for testing, analysis and presentation."
+      ],
+      "approach": [
+        {
+          "title": "Outline the catchment",
+          "body": "Traced the Ulu Yam catchment in Hulu Langat in Google Earth Pro, where the Anak Sungai Liam tributary feeds Sungai Liam and then Sungai Selangor, and exported it as KML/KMZ."
+        },
+        {
+          "title": "Convert and analyse",
+          "body": "Converted the data to GPX and into ArcMap features, interpolated elevation with IDW, generated contour lines, then layered the river and boundary data and masked it to the working area."
+        },
+        {
+          "title": "Fly and process",
+          "body": "Trained with JPS and DJI on the Phantom 4 Pro V2.0, flew an automated mission at Kuala Perlis, and processed the images in Pix4DMapper into an orthomosaic, a digital surface model and a dense 3D point cloud."
+        }
+      ],
+      "impact": [
+        {
+          "value": "166",
+          "label": "drone images processed into a 3D survey"
+        },
+        {
+          "value": "~90 m",
+          "label": "source elevation of the Anak Sungai Liam, mapped"
+        }
+      ],
+      "outcome": [
+        "An elevation and contour map of the Ulu Yam catchment that helps contractors, geographers and engineers plan construction, plus drone survey outputs for Kuala Perlis, and hands-on experience in drone photogrammetry."
+      ],
+      "tools": [
+        "ArcMap",
+        "Google Earth Pro",
+        "Pix4DMapper",
+        "DJI Phantom 4 Pro V2.0"
+      ]
+    }
+  },
+  {
+    "slug": "kl-transit",
+    "name": "KL Transit Scorer",
+    "category": "GIS",
+    "client": "Personal project",
+    "year": "2026",
+    "role": "Designer & builder",
+    "summary": "A GIS experiment scoring how accessible Kuala Lumpur is by public transport.",
+    "palette": [
+      "#0f2a2e",
+      "#e0a94f",
+      "#f5f2ee",
+      "#4f8a8b"
+    ],
+    "brand": "#dc2626",
+    "nda": false
+  }
+]

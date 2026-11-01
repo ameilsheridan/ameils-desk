@@ -1,0 +1,10 @@
+{
+  "email": "ameilsheridan@gmail.com",
+  "location": "Kuala Lumpur, Malaysia (UTC+8)",
+  "intro": "Have a role, a project or a question about my work? Send me a note.",
+  "links": [
+    { "label": "LinkedIn", "href": "" },
+    { "label": "GitHub", "href": "https://github.com/ameilsheridan" },
+    { "label": "Previous portfolio", "href": "https://ameilsheridan.wixsite.com/portfolio" }
+  ]
+}
